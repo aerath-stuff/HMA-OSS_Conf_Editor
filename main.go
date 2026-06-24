@@ -30,6 +30,8 @@ func main() {
 	// list scopes
 	applets.ListScope(cfg)
 
+	applets.ShowScopeDetails("com.zhenxi.hunter", cfg.Scope["com.zhenxi.hunter"])
+
 	applets.AddToScope(cfg, "com.zhenxi.hunter", &objects.AppConfig{
 		UseWhitelist: false,
 	}, false)

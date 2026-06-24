@@ -15,5 +15,6 @@ A standalone config editor for HMA-OSS
   - [ ] List templates
   - [ ] List settings templates
   - [ ] Modify enabled templates of app config
+  - [x] Show scope details
   - [ ] More...
 - [ ] Add configurator TUI
