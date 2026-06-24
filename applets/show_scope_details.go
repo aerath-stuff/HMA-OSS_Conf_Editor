@@ -21,6 +21,7 @@ package applets
 
 import (
 	"fmt"
+	"hma_oss_conf_editor/consts"
 	"hma_oss_conf_editor/objects"
 )
 
@@ -38,7 +39,8 @@ Work mode: %v
 Installation source spoofing: %v
 Invert Activity launch protection: %v
 Exclude vold isolation: %v
-Restricted Zygote permissions: %v
+Restricted Zygote permissions:
+%v
 
 Applied templates:
 %v
@@ -60,6 +62,12 @@ Extra opposite app list:
 `
 
 func ShowScopeDetails(packageName string, appConfig *objects.AppConfig) {
+	zygoteRestrictions := ""
+	for _, k := range appConfig.RestrictedZygotePermissions {
+		item := consts.ZygotePermissions[k]
+		zygoteRestrictions += fmt.Sprintln("-", item)
+	}
+
 	workMode := workModeBlacklist
 	if appConfig.UseWhitelist {
 		if appConfig.ExcludeSystemApps {
@@ -119,7 +127,7 @@ func ShowScopeDetails(packageName string, appConfig *objects.AppConfig) {
 		instSource,
 		appConfig.InvertActivityLaunchProtection,
 		appConfig.ExcludeVoldIsolation,
-		appConfig.RestrictedZygotePermissions,
+		zygoteRestrictions,
 		applyTemplates,
 		applyPresets,
 		applySettingsTemplates,
