@@ -17,17 +17,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package main
+package applets
 
-import "hma_oss_conf_editor/applets"
+import (
+	"fmt"
+	"hma_oss_conf_editor/objects"
+	"maps"
+	"slices"
+)
 
-func main() {
-	cfg := applets.ParseConfig("example.json")
+func DeleteFromScope(config *objects.JsonConfig, packageNames []string) {
+	total := len(packageNames)
+	if total < 1 {
+		fmt.Println("Package name list is empty")
+		return
+	}
 
-	// list scopes
-	applets.ListScope(cfg)
+	if len(config.Scope) < 1 {
+		fmt.Println("Scope list is empty")
+		return
+	}
 
-	// try to delete one scope twice
-	applets.DeleteFromScope(cfg, []string{"com.zhenxi.hunter"})
-	applets.DeleteFromScope(cfg, []string{"com.zhenxi.hunter"})
+	maps.DeleteFunc(
+		config.Scope,
+		func(key string, value *objects.AppConfig) bool {
+			val := slices.Contains(packageNames, key)
+			if val {
+				fmt.Printf("Removing %v from scope\n", key)
+			}
+
+			return val
+		},
+	)
 }
