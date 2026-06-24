@@ -10,6 +10,7 @@ A standalone config editor for HMA-OSS
   - [x] List scope
   - [x] Delete from scope
   - [x] Add to scope
+    - [x] Check for should not hide
   - [ ] Copy another app scope
   - [ ] Delete settings configs
   - [ ] List templates

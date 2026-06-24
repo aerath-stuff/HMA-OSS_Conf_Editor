@@ -21,7 +21,9 @@ package applets
 
 import (
 	"fmt"
+	"hma_oss_conf_editor/consts"
 	"hma_oss_conf_editor/objects"
+	"slices"
 )
 
 func AddToScope(
@@ -35,6 +37,11 @@ func AddToScope(
 			fmt.Println("Scope exists")
 			return false
 		}
+	}
+
+	if slices.Contains(consts.PackagesShouldNotHide, packageName) {
+		fmt.Println("This package should not be added as target")
+		return false
 	}
 
 	config.Scope[packageName] = appConfig
