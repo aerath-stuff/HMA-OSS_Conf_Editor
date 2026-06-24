@@ -17,31 +17,26 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package main
+package applets
 
 import (
-	"hma_oss_conf_editor/applets"
+	"fmt"
 	"hma_oss_conf_editor/objects"
 )
 
-func main() {
-	cfg := applets.ParseConfig("example.json")
+func AddToScope(
+	config *objects.JsonConfig,
+	packageName string,
+	appConfig *objects.AppConfig,
+	overwrite bool,
+) bool {
+	if !overwrite {
+		if _, ok := config.Scope[packageName]; ok {
+			fmt.Println("Scope exists")
+			return false
+		}
+	}
 
-	// list scopes
-	applets.ListScope(cfg)
-
-	applets.AddToScope(cfg, "com.zhenxi.hunter", &objects.AppConfig{
-		UseWhitelist: false,
-	}, false)
-
-	// try to delete one scope twice
-	applets.DeleteFromScope(cfg, []string{"com.zhenxi.hunter"})
-	applets.DeleteFromScope(cfg, []string{"com.zhenxi.hunter"})
-
-	applets.AddToScope(cfg, "com.zhenxi.hunter", &objects.AppConfig{
-		UseWhitelist: false,
-	}, false)
-	applets.AddToScope(cfg, "com.zhenxi.hunter", &objects.AppConfig{
-		UseWhitelist: false,
-	}, false)
+	config.Scope[packageName] = appConfig
+	return true
 }
