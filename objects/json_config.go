@@ -30,6 +30,7 @@ type JsonConfig struct {
 	AltVoldAppDataIsolation         bool                         `json:"altVoldAppDataIsolation"`
 	SkipSystemAppDataIsolation      bool                         `json:"skipSystemAppDataIsolation"`
 	PackageQueryWorkaround          bool                         `json:"packageQueryWorkaround"`
+	WebViewProtection               bool                         `json:"webViewProtection"`
 	Templates                       map[string]*AppTemplate      `json:"templates"`
 	SettingsTemplates               map[string]*SettingsTemplate `json:"settingsTemplates"`
 	DisabledHooks                   []*DisabledHook              `json:"disabledHooks"`

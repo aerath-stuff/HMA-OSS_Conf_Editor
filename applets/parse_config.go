@@ -40,7 +40,9 @@ func ParseConfig(filePath string) *objects.JsonConfig {
 		log.Fatalf("cannot read file %v due to %v", filePath, err)
 	}
 
-	parsed := objects.JsonConfig{}
+	parsed := objects.JsonConfig{
+		WebViewProtection: true,
+	}
 	err = json.Unmarshal(content, &parsed)
 	if err != nil {
 		log.Fatalf("cannot parse %v due to %v", filePath, err)
