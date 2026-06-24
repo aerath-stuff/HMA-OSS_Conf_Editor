@@ -4,7 +4,7 @@ A standalone config editor for HMA-OSS
 
 ## TODO
 
-- [ ] Add current presets/settings presets list
+- [x] Add current presets/settings presets list
 - [ ] Add functions as applets
   - [x] Parse config
   - [x] List scope
